@@ -1,0 +1,7 @@
+# Default ignored files
+/shelf/
+/.idea
+/workspace.xml
+/target
+/logs/log.txt
+/output/cucumber-html-reports
