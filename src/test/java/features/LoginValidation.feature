@@ -18,6 +18,6 @@ Feature:A customer is able to successfully log in with valid credentials.
     And "<message>" is displayed as "message" in the response body
     Examples:
       | username                | password         | deviceType | tenant | statusCode | error       | message                                                  |
-      | shop-user@redteclab.com | aA1!bB2@cC3#dD4$ |            | fr     | 400        | Bad Request | customer-authentication.error.wrong.username.or.password |
+      | shop-user@redteclab.com | aA1!bB2@cC3#dD4$ | iosApp     | fr     | 400        | Bad Request | customer-authentication.error.wrong.username.or.password |
       | shop-user@redteclab.com | aA1!bB2@cC3#dD4$ | browser    | ch     | 400        | Bad Request | customer-data-service.error.bad_request                  |
       | shop-user@redteclab.com | aA1!bB2@cC3#dD4$ | androidApp | it     | 400        | Bad Request | customer-data-service.error.bad_request                  |
