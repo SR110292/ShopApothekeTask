@@ -15,7 +15,6 @@ import java.io.PrintStream;
 import java.util.Properties;
 
 public class Utils {
-    private static RequestSpecification requestSpecification;
 
     public static String getConfigFileValue(String key) throws IOException {
         Properties properties = new Properties();
@@ -27,19 +26,17 @@ public class Utils {
     public RequestSpecification requestSpecification(String deviceType, String tenant) throws IOException {
         DeviceTypeResources deviceTypeResources = DeviceTypeResources.valueOf(deviceType);
         TenantResources tenantResources = TenantResources.valueOf(tenant);
-        if (requestSpecification == null) {
-            PrintStream log = new PrintStream(new FileOutputStream("logs/log.txt"));
-            requestSpecification = new RequestSpecBuilder()
-                    .setBaseUri(getConfigFileValue("baseUrl"))
-                    .setContentType(ContentType.JSON)
-                    .addHeader("Sae-Device-Type", deviceTypeResources.getDeviceType())
-                    .addPathParam("tenant", tenantResources.getTenant())
-                    .addFilter(RequestLoggingFilter.logRequestTo(log))
-                    .addFilter(ResponseLoggingFilter.logResponseTo(log))
-                    .build()
-                    .log()
-                    .all();
-        }
+        PrintStream log = new PrintStream(new FileOutputStream("logs/log.txt"));
+        RequestSpecification requestSpecification = new RequestSpecBuilder()
+                .setBaseUri(getConfigFileValue("baseUrl"))
+                .setContentType(ContentType.JSON)
+                .addHeader("Sae-Device-Type", deviceTypeResources.getDeviceType())
+                .addPathParam("tenant", tenantResources.getTenant())
+                .addFilter(RequestLoggingFilter.logRequestTo(log))
+                .addFilter(ResponseLoggingFilter.logResponseTo(log))
+                .build()
+                .log()
+                .all();
         return requestSpecification;
     }
 
